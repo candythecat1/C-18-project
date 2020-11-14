@@ -52,14 +52,15 @@ function draw() {
   stroke("black")
   textSize(20);
   fill("black");
-  survivalTime = Math.ceil(frameCount/frameRate())
+  
   text("survivalTime: "+survivalTime,100,50)
   
    if (gameState===PLAY){
+     survivalTime = Math.ceil(frameCount/frameRate())
+  
       if (ground.x < 0){
       ground.x = ground.width/2;
     }
-  
 if(keyDown("space")&& monkey.y >= 230) {
         monkey.velocityY = -12;
     }
@@ -69,10 +70,14 @@ if(keyDown("space")&& monkey.y >= 230) {
     }
    }
   else if (gameState === END) {
+    ground.destroy();
+   
    monkey.destroy();
     obstaclesGroup.destroyEach();
     bananaGroup.destroyEach();
- survivalTime = 0;
+textSize(30);
+    fill("red")
+  text("Game Over",100,200)
   }
 
 monkey.collide(ground);
@@ -104,7 +109,7 @@ if (frameCount % 60 === 0){
 obstacle = createSprite(350,320,20,20);
   obstacle.velocityX = -6
 obstacle.addImage(obstacleImage);
-  obstacle.scale = 0.17;
+  obstacle.scale = 0.13;
   
    obstaclesGroup.add(obstacle);
  }
